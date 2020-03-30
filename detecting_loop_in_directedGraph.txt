@@ -1,0 +1,18 @@
+Done using Topological sorting:
+fun(pq = prequisites, n = number of courses):
+	.create a new array indeg of size n
+ 	.set all values of indeg to zero
+	.now set indeg[index] += 1 , where index = pq[i][0]
+	.create a stack<int> s
+	.create a count = 0
+	.push indeg[i] to s, if indeg[i] == 0
+	.while(s not empty):
+		.count++
+		.int curr = s.top();
+		.loop i to n:
+			.if curr == pq[i][1]:
+				.set pq[i][0] -= 1
+				.if indeg[i] == 0, push to s
+
+
+	.return count == n

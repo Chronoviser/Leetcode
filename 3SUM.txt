@@ -1,0 +1,43 @@
+3 SUM
+************
+given an array find all unique set of three elements whose
+sum is zero.
+************
+Given array nums = [-1, 0, 1, 2, -1, -4],
+
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+*************
+algo : 
+1. sort nums
+2. n = size of nums
+3. for(i = 0 ;i<n-2 ;i++)
+	if(i>0 && nums[i] == nums[i-1])
+		continue;
+	 left = i+1,right = n-1
+	 while(left < right)
+		total = nums[i]+nums[left]+nums[right];
+		if(total < 0)
+			left++
+		else if(total > 0)
+			right--
+		else
+			ans.push(nums[i],nums[left],nums[right])
+			while(left<right && nums[left] == nums[left+1])
+				left++;
+			while(left<right && nums[right] == nums[right-1])
+				right--;
+			left++;
+			right--;
+4. return ans
+			
+
+
+
+
+/*******
+* similarly we can do 4sum problem just nee to add another loop
+* k-sum problem will be solved in O(n^(k-1)) complexity 

@@ -1,0 +1,25 @@
+3sum closest
+~~~~~~~~~~~~~
+[-4 -1 1 2]
+/////////////////////
+algo : 
+1.  sort nums
+2. int n = nums.size(),ans = 999999
+3. for(int i=0;i<n-2;i++)
+	int left = i+1,right = n-1;
+	while(left<right)
+		int total = nums[i] + nums[left] + nums[right];
+		ans = isClosest(ans,total,target);
+		if(total < target)
+			left++;
+		else if(total > target)
+			right--;
+		else 
+			return 0;
+4. return ans;
+//////////////////
+alg for isClosest:
+isClosest(int ans,int total,int target)
+	if(abs(ans - target) > abs(total - target))
+		return total;
+	return ans;

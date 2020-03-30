@@ -1,0 +1,42 @@
+PanCake Sorting
+-------------------
+very easy algo:
+n  = arr.size()-1;
+1. find index of max element from first n elements
+2. flip(0,index)
+3. flip(0,n)
+4. check if sorted : if yes :: HURRAY!
+5. if no : set n = n-1 : REPeat!
+-----------------------------------------------
+code : 
+vector<int> ans;
+    bool isSorted(vector<int> A){
+        vector<int> B = A;
+        sort(B.begin(),B.end());
+        return A == B;
+    }
+    void flip(vector<int>& A,int inx){
+        reverse(A.begin(),A.begin()+inx+1);
+    }
+    void PanCakeSort(vector<int>& A,int n){
+        int maxe = INT_MIN,maxi = -1;
+        for(int i=0;i<=n;i++){
+            if(maxe < A[i]){
+                maxe = A[i];
+                maxi = i;
+            }
+        }
+        ans.push_back(maxi+1);
+        flip(A,maxi);
+        if(isSorted(A))
+            return;
+        ans.push_back(n+1);
+        flip(A,n);
+        if(isSorted(A))
+            return;
+        PanCakeSort(A,n-1);  
+    }
+    vector<int> pancakeSort(vector<int>& A) {
+        PanCakeSort(A,A.size()-1);
+        return ans;
+    }

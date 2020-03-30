@@ -1,0 +1,35 @@
+Best way to create an AVL tree is to get the sorted array traversal
+then treating middle element as root create tree recursively:)
+Given the sorted linked list: [-10,-3,0,5,9],
+PROBLEM : 
+One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+CODE:
+class Solution {
+public:
+    TreeNode* buildTree(vector<int> v,int start,int end){
+        if(start > end)
+            return NULL;
+        int index = (start + end)/2;
+        TreeNode* root = new TreeNode(v[index]);
+        root->left = buildTree(v,start,index-1);
+        root->right = buildTree(v,index+1,end);
+        return root;
+    }
+    TreeNode* sortedListToBST(ListNode* head) {
+     if(!head)
+         return NULL;
+      vector<int> v;
+        ListNode* temp = head;
+      while(temp){
+          v.push_back(temp->val);
+          temp = temp->next;
+      }
+        return buildTree(v,0,v.size()-1);
+    }
+};

@@ -1,0 +1,26 @@
+Cloning Of A Graph means we have to create an exactly similar graph:)
+we cannot fool the compiler by returning the root node of original graph
+Node* clone(Node* node){
+ if(!node)
+	return NULL;
+ unordered_map<Node*,Node*> m;    // it maps original nodes with clone nodes
+ queue<Node*> q;                  // it contains original node ------ BFS is being performed;
+ q.push(node);
+ Node* cloneNode = new Node(node->val,{});
+ m[node] = cloneNode;
+ while(!q.empty())
+ { 
+	Node* wnode = q.front(); q.pop();                            //copy of original node
+	Node* wcloneNode = m[wnode];                                // copy of cloned Node
+	for(auto nbr : wnode->neighbors){                             //traversing through all the neighbors of wnode
+		if(!m[nbr])                                           //if clone nbr is not present
+   		Node* newNbr = new Node(nbr->val,{});              // create the neighbor
+		m[nbr] = newNbr;
+		q.push(nbr);
+		}
+		wcloneNode.push_back(m[nbr]);                     // connect the wcloneNode with its nieghbor
+	}
+
+} 
+return m[node];
+}

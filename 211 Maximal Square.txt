@@ -1,0 +1,27 @@
+Maximal Square Submatrix (Similarly we can do 1277. Count Square Submatrices with All Ones)
+-------------------------------
+problem : Given a 2d matrix find the largest square
+	 such that all of its elemensts are 1
+
+---
+intituion : 
+1. for boundary i= 0 || j = 0 :::: value will be same as
+   value for that index of 2d matrix (squares of size 1)
+2. for each index (i,j)  we will be focusing on max_allone_squares
+  having this index as its 'bottom-right' corner.
+3. if mat[i][j] = 0 ---> dp[i][j] = 0
+else dp[i][j] = min(mat[i-1][j],mat[i][j-1],mat[i-1][j-1]) + 1
+4. We keep on updating each (i,j) index and keep rercord of
+max value ion the matrix 
+
+----------------------------------------------------------------------
+algorithm : 
+fun(vector<vector<int>> mat):
+	for(i<- 0 to m):
+		for(j<-0 to n):
+			if(i == 0 OR j == 0) dp[i][j] = mat[i][j]
+			else if(mat[i][j] == 0) dp[i][j] = 0
+			else dp[i][j] = min(mat[i-1][j],mat[i][j-1],mat[i-1][j-1]) + 1
+			maxe = max(maxe,dp[i][j])	
+return maxe
+		

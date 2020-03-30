@@ -1,0 +1,26 @@
+Longest Pallindromic Subsequence
+-------------------------------------
+Intution:
+check(S,i)
+1. let S be the string T = reversed(S)
+2. there are two cases:
+	1. S[i] = T[i]
+		LPS += check(S,i+1) + 2
+	2. S[i] != T[i]
+		LPS += check(S,i)
+
+recursive solution takes O(2^mm) time
+We can do better 
+USING DP
+--------------------------------------------
+S = original string; T = reversed string;
+int dp[m+1][m+1] = {0);
+for(int i=1;i<=m;i++)
+for(int j=1;j<=m;j++)
+{
+	if(S[i-1] == T[j-1])
+	dp[i][j] = 1 + dp[i-1][j-1];
+	else
+	dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+}
+return dp[m][m]

@@ -1,0 +1,38 @@
+product less than k 
+it is a sliding window problem
+***********************************
+Input: nums = [10, 5, 2, 6], k = 100
+Output: 8
+**********************************
+intution : 
+int start = 0,res = 0,prod = 1;
+        for(int i=0;i<n;i++){
+            prod *= nums[i]; //10 //50
+            while(start < i && prod >= k ){
+                prod /= nums[start];
+                start++;
+            }
+            if(prod < k){
+                int len = i - start + 1; //1 //2
+                res += len;  //1 //2
+            }
+        }		 
+	
+}
+why are we adding len to res and not single elements ....
+because if product of all elements in lenght len < k
+then obviously all elements must also be less than k
+.'. we add len to res
+**********************************
+algo:
+1. start = 0,end = 0,prod = 1,res = 0
+2. for(i<-0 to n-1)
+	prod *= nums[i];
+	while(start < end && prod >=k )
+		prod /= nums[start]
+		start++;
+	if prod<k:
+		res += end - start + 1
+		end++
+3. return res
+		

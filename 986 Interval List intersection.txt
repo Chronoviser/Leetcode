@@ -1,0 +1,25 @@
+Interval List INtersection
+------------------------------
+Input: A = [[0,2],[5,10],[13,23],[24,25]],
+       B = [[1,5],[8,12],[15,24],[25,26]]
+Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+-------------------------------------------------------
+algo : 
+//sort A  and B if required
+vector<vector<int>> ans;
+take i = 0,j = 0;  // i for A and j  for B
+while(i < A.size() && B.size())
+{
+ int maxe = max(A[i][0],B[j][0]); //max among the first ele
+ int mine = min(A[i][1],B[j][1]); //min among the second ele 
+ //If maxe < mine there's no intersection
+ if(maxe <= mine)
+	{
+	ans.push_back({maxe,mine});
+	}
+ //whether to increment  i or j
+ // if A[i][1] < B[j][1]   ----> i++
+ // else if A[i][1] == B[j][1] && A[i][0] < B[j][0] --> i++
+ // else j++
+}
+ 

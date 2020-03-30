@@ -1,0 +1,42 @@
+sorrounding region
+Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
+
+A region is captured by flipping all 'O's into 'X's in that surrounded region.
+
+Example:
+
+X X X X
+X O O X
+X X O X
+X O X X
+After running your function, the board should be:
+
+X X X X
+X X X X
+X X X X
+X O X X
+:
+ALGO :
+traverse along borders to find all 'O's now perform DFS for these 'O's,
+and mark all these connected 'O's as visited.
+Now iterate through inner matrix and check if element is 'O' but not visited
+   if yes : flip it
+:)
+// we could have used different DFS loops for visiting and flipping
+// but instead we use a bool var flip
+DFS used :
+void DFS(vector<vector<char>>& board,int row,int j,vector<vector<char>>& visited){
+if(row < 0 || col < 0|| row > board.size() - 1 || col > board[0].size()-1)
+return;
+if(visited[row][col] || board[row][col] == 'X')
+return;
+visited[row][col] = true;
+if(flip)
+{ 
+ board[row][col] = 'X';
+}
+DFS one step back
+DFS one step forward
+DFS one step down
+DFS one step up
+}

@@ -1,0 +1,23 @@
+Maximum Product Subarray
+---------------------------------
+Intution : 
+1.Problem is only with negative numbers
+2. We maintain 2 arrays cMin and cMax
+3. cMin[i] : minimum product upto the index i             // This is beacuse we don't know if we encounter one more negative number and overall product becomes maximum
+   cMax[i] : maximum product upto the index i
+4. cMin[i] = min(arr[i],cMin[i-1]*arr[i],cMax[i-1]*arr[i])
+   cMax[i] = max(arr[i],cMax[i-1]*arr[i],cMin[i-1]*arr[i])
+5. Now find max among all cMax : <- that's your answer
+-----------------------------------------------------------------
+code : 
+int *cM = new int[nums.size()];
+int *cm = new int[nums.size()];
+cM[0]  = cm[0] = nums[0];
+for(int i=1;i<nums.size();i++){
+    cM[i] = max(nums[i],max(cM[i-1]*nums[i],cm[i-1]*nums[i]));
+    cm[i] = min(nums[i],min(cM[i-1]*nums[i],cm[i-1]*nums[i]));
+}
+int maxe = INT_MIN;
+for(int i=0;i<nums.size();i++)
+    maxe = max(cM[i],maxe);
+return maxe;

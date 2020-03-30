@@ -1,0 +1,18 @@
+Checking whether one Binary tree is a subtree of another
+----------------------------------------------------------
+bool isIdentical(Node* s,Node* t){
+if(!s && !t) return true;
+if(!s || !t) return false;
+return ((s->val == t->val) && isIdentical(s->left,t->left) && isIdentical(s->right,t->right));
+}
+
+bool isSubTree(Node* s,Node* t){
+if(!s)
+	return false;
+if(s->val == t->val)
+	if(isIdentical(s,t))
+		return true;
+if(isIdentical(s->left,t) || isIdentical(s->right,t))
+	return true;
+return false;
+}

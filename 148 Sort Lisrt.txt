@@ -1,0 +1,73 @@
+Sorting a linked list
+-----------------------
+we use merge sort
+------------------
+partitioning : 
+
+node* listSort(node *head){
+ node *slow = head,*fast = head,*temp = head;
+ while(fast && fast->next){
+ temp = slow;
+ slow = slow->next; 
+ fast = fast->next->next;
+ }
+ node *left = listSort(head);
+ node *right = listSort(slow);
+ return merge(left,right);
+}
+----------------------------------
+merging:
+
+node* merge(node* left,node* right){
+ node* newHead = NULL;
+ node *temp = newHead;
+       while(left && right){
+           if(left->val < right->val){
+               node* node = new node(left->val);
+               left = left->next;
+               if(newHead == NULL){
+                   newHead = node;
+                   temp = newHead;
+               }
+               else {
+                   temp->next = node;
+                    temp = temp->next;
+               }
+           }
+           else{
+               node* node = new node(right->val);
+               right = right->next;
+               if(newHead == NULL){
+                   newHead = node;
+                   temp = newHead;
+               }
+               else{
+                   temp->next = node;
+                    temp = temp->next;
+               }
+           }
+       }
+        while(left){
+            node* node = new node(left->val);
+               left = left->next;
+               if(newHead == NULL){
+                   newHead = node;
+                   temp = newHead;
+               }
+               else {
+                   temp->next = node;
+                    temp = temp->next;
+               }}
+        while(right){
+            node* node = new node(right->val);
+               right = right->next;
+               if(newHead == NULL){
+                   newHead = node;
+                   temp = newHead;
+               }
+               else{
+                   temp->next = node;
+                    temp = temp->next;
+               }}
+        return newHead;
+}

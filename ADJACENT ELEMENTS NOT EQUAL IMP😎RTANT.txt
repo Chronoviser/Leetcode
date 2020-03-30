@@ -1,0 +1,50 @@
+Arrange elements of an array such that adjacent elements are not same: 
+---------------------------------------------------------------------------
+1. store element,frequency for each element in  a map
+2. now create a priority_queue<pair<int,int>> pq; /// which is to implement
+3. store elements from map to pq but in freq,elem order /// because max heap based on freq is to be created
+4. now iterate over pq:
+	0. create a pair<int,int> pp;  /// to store previous pair
+	1. remove top pair of pq
+	2. check if previous pair was pp : if not include it in ans vector, dec its count and push it back : also if pp is not null push it back to pq and set it null
+	3. else set pp = current pair
+return ans;
+-----------------------------------------
+code:
+class Solution {
+public:
+    vector<int> rearrangeBarcodes(vector<int>& bcd) {
+        if(bcd.size() <= 2)
+            return bcd;
+        unordered_map<int,int> m;
+        priority_queue<pair<int,int>> pq;
+        for(auto a : bcd){
+            m[a]++;
+        }
+        for(auto a : m)
+        {
+            pq.push({a.second,a.first});
+        }
+        vector<int> ans;
+        int prev = -1;
+        pair<int,int> pp;
+        while(!pq.empty()){
+            pair<int,int> i = pq.top(); pq.pop();
+            if(prev != i.second && i.first!=0){
+                ans.push_back(i.second);
+                i.first--;
+                prev = i.second;
+                pq.push(i);
+                if(pp.second != 0 && pp.first != 0)
+                {
+                    pq.push(pp);
+                pp = {0,0};
+                }
+            }
+            else if(prev == i.second){
+                pp = i;
+            }
+        }
+            return ans;
+    }
+};

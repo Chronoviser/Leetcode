@@ -1,0 +1,45 @@
+Partition list is a very intereseting question
+problem statement:
+A string S of lowercase letters is given.
+We want to partition this string into as many parts
+as possible so that each letter appears in at most
+one part, and return a list of integers representing 
+the size of these parts.
+***********************
+example : 
+Input: S = "ababcbacadefegdehijhklij"
+Output: [9,7,8]
+***********************
+Intution:
+1. we will hold the last ocurrnece of each character 
+in the string
+2. Now traverse over the string as : 
+	start = 0, end = last occurence of S[start]
+	j = start + 1;
+		while j < end:
+			end = max(end,last occurence of S[j])
+		push 'end - start + 1' to result
+		set start = end+1
+**************************
+code:
+    vector<int> partitionLabels(string S) {
+       vector<int> ans;
+        if(S.length() == 0)
+            return ans;
+        vector<int> counts(26,-1);
+        for(int i=0;i<S.length();i++){
+            counts[S[i] - 'a'] = i;
+        }
+        int start = 0;
+        while(start < S.length()){
+            int end = counts[S[start] - 'a'];
+            int j = start + 1;
+            while(j < end){
+                end = max(end,counts[S[j] - 'a']);
+                j++;
+            }
+            ans.push_back(end - start + 1);
+            start = end + 1;
+        }
+        return ans;
+    }

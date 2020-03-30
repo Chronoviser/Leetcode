@@ -1,0 +1,146 @@
+Number of Unique binary search trees for a value n
+-----------------------------------------------------
+for:
+n =1  >> 1
+n = 2 >> 2
+n = 3 >> 5
+n = 4 >> 14
+.
+.
+.
+for any n : {1,2,3,4,...,n}
+select one of the number as root : 
+then find out number of elements in its right(r) and left(l) subtree 
+no of bst will be = r*l
+do this for all {1,2,3,...,n}
+sum them up and you'll get no of BSTs for a value 'n'
+-------------------------------------------------------------
+int numTrees(int n) {
+        if(n==1 || n==2) return n;
+        int dp[n+1] = {0};
+        dp[0] = 1,dp[1] = 1,dp[2] = 2;
+        for(int i=3;i<=n;i++){
+            for(int k=0;k<i;k++){
+                dp[i] += dp[k]*dp[i-k-1];
+            }
+        }
+    return dp[n];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

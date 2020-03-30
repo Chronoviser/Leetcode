@@ -1,0 +1,18 @@
+Diameter of a Binary Tree
+----------------------------
+algo : 
+1. preorder traversal 
+------------------------------
+code :
+int diameter = 0;
+diameterOfBinary(TreeNode* root){
+ findD(root);
+return diameter;
+}
+findD(TreeNode* root){
+if(!root) return NULL;
+int left = findD(root->left);
+int right = findD(root->right);
+diameter = max(left+right,diameter);
+return 1 + max(left,right);
+}

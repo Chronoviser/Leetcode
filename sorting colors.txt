@@ -1,0 +1,13 @@
+in-place sorting of an array using two pointers
+algo :
+nums is the array of size n
+i = 0, j = n-1
+while(j>0)
+	if(nums[i] > nums[j])
+		swap(nums[i],nums[j])
+		i++
+	else
+		i++
+	if(i == j)
+		j--
+		i=0

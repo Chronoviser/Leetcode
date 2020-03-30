@@ -1,0 +1,35 @@
+Finding Nth Ugly number
+---------------------------
+Intution:
+
+1.create an array Ugly[n+1];
+Ugly[0] = 0;
+Ugly[1] = 1;
+
+2. multiples_of_2 = 2,4,6,8,10,12,14,....,i2 = 0
+multiples_of_3 = 3,6,9,12,15,18....,i3 = 0
+multiples_of_5 = 5,10,15,20,25,30,...,i5 = 0
+keep adding to Ugly[i] = min(multiples_of_{2,3,5})
+and keep icremeneting the corresponding {i2,i3,i5}
+
+-----------------------------------------------------
+Algorithm :
+NthUglyNumber(n):
+if n<=6 : return n
+Ugly[n],next2=2,next3=3,next5=5,i2=0,i3=0,i5=0,nextUgly=1
+Ugly[0] = 1
+for i<-1 to n:
+	nextUgly = min(next2,next3,next5)
+	Ugly[i] = nextUgly
+	if nextUgly == next2:
+		i2++
+		next2 = Ugly[i2]*2 
+	if nextUgly == next3:
+		i3++
+		next3 = ugly[i3]*3
+	if nextUgly == next5:
+		i5++
+		next5 = ugly[i5]*5
+return Uglyn[n]
+---------------------------------------
+https://drive.google.com/file/d/1syiOuxU9q3td6XCUa9P51APZnFCOSWoN/view

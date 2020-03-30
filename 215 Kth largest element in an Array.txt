@@ -1,0 +1,15 @@
+How to find Kth largest element in an array
+--------------------------------------------
+Tip : Whenever talked about max or min always think of Heaps
+Here for finding Kth largest element we create a Min-heap
+and soon as it's size becomes greater than K, pop the root
+finally return the root <---- that is the answer
+---------------------------------------------------
+Algo : 
+priority_queue<int,vector<int>,greater<int>> pq;
+for(auto i : nums){
+ pq.push(i);
+	if(pq.size() > k)
+	 pq.pop();
+}
+return pq.top();

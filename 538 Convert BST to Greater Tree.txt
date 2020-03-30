@@ -1,0 +1,28 @@
+Convert BST to  Greater Tree
+------------------------------
+int magic(TreeNode* root,int sum){
+        if(!root) return 0;
+        if(!root->left && !root->right)
+        {
+            root->val += sum;
+            return root->val;
+        }
+        int p=0;
+        p = magic(root->right,sum);
+        if(p!=0)                                               //this step is required for what if left or right child was null then this would make the current 'sum' also NULL so we don't want that
+            sum = p;
+        p= 0;
+        root->val += sum;
+        sum = root->val;
+        p = magic(root->left,sum);
+        if(p!=0)
+            sum = p;
+        return sum;
+    }
+    TreeNode* convertBST(TreeNode* root) {
+        if(!root)
+            return NULL;
+        int p = magic(root,0);
+        return root;
+    }
+--------------------------------------------------------

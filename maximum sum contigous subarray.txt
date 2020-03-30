@@ -1,0 +1,33 @@
+Maximum sum contigous subarray : 
+-----------------------------------------
+Using Divide-n-Conquer O(nlog n)
+. . . . . . . . . . . . . . . . . . 
+maxSum(arr[],low,high):
+	if(low == high)
+		return arr[low]
+	int mid = (low + high)/2
+	return max(max(maxSum(arr,low,mid),maxSum(arr,mid+1,high)),maxCrossSum(arr,low,mid,high))
+'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`''`'`'`'`'`'`'`'`'`'`
+//this function takes care of the subarrays which get partitioned
+maxCrossSum(arr[],low,mid,high):
+	sum = 0,leftMax =  INT_MIN, rightMax = INT_MIN
+	for(i->mid to low):	
+		sum += arr[i]
+		leftMax = max(sum,leftMax)
+	sum = 0
+	for(i->mid+1 to high):
+		sum += arr[i]
+		rightMax = max(sum,rightMax)
+	return leftMax + rightMax
+---------------------------------------------------------------------------------------------------------
+Using Sliding Window (Kadane's algorithm) O(n)
+. . . . . . . . . . . . . . . .. . . . . .. . . . . .. . . . . .. . . 
+maxSum(arr[]):
+	start = 0,end = 0,maxS = INT_MIN,sum = 0,n = arr.size() 
+	while(end < n):
+		while(end <n && sum >= 0):
+			sum += arr[end++]
+			maxS = max(maxS,sum)
+		while(start < end && sum <0):
+			sum -= arr[start++]
+	return maxS

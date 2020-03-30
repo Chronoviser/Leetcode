@@ -1,0 +1,28 @@
+Finding Maximum Area of a Histogram
+------------------------------------
+use a stack s
+for each v[i] :
+	if s.empty() OR v[s.top()] <= v[i]  : s.push(i++)
+	else :
+		top = s.pop()
+		if s.empty() : area = v[top]*i
+		else : area = v[top]*(i - s.top() - 1)
+		maxArea = max(maxArea,area)
+while !s.empty():
+	top = s.pop()
+	if s.empty() : area = v[top]*i
+	else : area = v[top]*(i - s.top() - 1)
+	maxArea = max(maxArea,area)
+return maxArea
+//\/\//\/\/\/\/\//\/\/\/\\/\//\\/\/\/\/\\/\/\/\/\//\/\\/\/\/\/\//\/\/\\/\/\/\/\/\/\/\/
+
+Finding Max all one Rectangle
+---------------------------------------------------------------
+given  matrix : mat[m][n]
+create a vector v(n,0)
+for i<- 0 to m:
+	for j<-0 to n:
+		if mat[i][j] == 1 : 	v[j] += 1
+		else : v[j] = 0
+       maxArea = max(maxArea,MaxAreaOfHistogram(v))
+return maxArea
